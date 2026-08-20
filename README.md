@@ -1,2 +1,3 @@
 # RWTH-Latex-Beamer-Presentation-Template
-A Latex Beamer Template for RWTH Presentations
+
+Heyho. For students of the RWTH using beamer I created a template in beamer I use myself. Enjoy. CC0, do whatever you want with it.
