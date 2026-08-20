@@ -1,0 +1,315 @@
+\documentclass[aspectratio=169]{beamer}
+
+% RWTH Theme and Colors
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{csquotes}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{tikz}
+
+% Biblatex Bibliography
+\usepackage[backend=biber,style=nature,sorting=none,maxbibnames=99]{biblatex}
+%\addbibresource{references.bib}%
+\renewcommand*{\bibfont}{\footnotesize}
+
+% Define RWTH Colors
+\definecolor{RWTHblue}{RGB}{0,84,159}        % RWTH Primary Blue
+\definecolor{RWTHred}{RGB}{199,32,44}        % RWTH Red
+\definecolor{RWTHgrey}{RGB}{89,89,89}        % RWTH Grey
+\definecolor{RWTHlightgrey}{RGB}{196,196,196} % RWTH Light Grey
+
+% Color numeric citation labels blue (RWTHblue) - must come after RWTHblue is defined
+\DeclareFieldFormat{labelnumber}{\textcolor{RWTHblue}{#1}}
+\DeclareFieldFormat{labelnumberwidth}{\textcolor{RWTHblue}{#1}}
+
+% Beamer Theme Configuration
+\usetheme{Boadilla}
+\usecolortheme[named=RWTHblue]{structure}
+\setbeamercolor{palette primary}{bg=RWTHblue, fg=white}
+\setbeamercolor{palette secondary}{bg=RWTHgrey, fg=white}
+\setbeamercolor{palette tertiary}{bg=RWTHblue!80, fg=white}
+\setbeamercolor{alerted text}{fg=RWTHred}
+\setbeamercolor{frametitle}{bg=RWTHblue, fg=white}
+\setbeamercolor{title}{fg=RWTHblue}
+
+% Font Configuration
+\usefonttheme{structurebold}
+\setbeamerfont{title}{size=\Large, series=\bfseries}
+\setbeamerfont{subtitle}{size=\normalsize}
+\setbeamerfont{frametitle}{size=\large, series=\bfseries}
+
+% Customize Bullet Points (flat design)
+\setbeamertemplate{items}[default]
+\setbeamertemplate{itemize item}{\tiny\raise1.25pt\hbox{\donotcoloroutermaths$\blacksquare$}}
+\setbeamertemplate{itemize subitem}{\tiny\raise1.25pt\hbox{\donotcoloroutermaths$\blacktriangleright$}}
+\setbeamertemplate{itemize subsubitem}{\tiny\raise1.25pt\hbox{\donotcoloroutermaths$\bullet$}}
+
+% Customize Table of Contents bullets (flat design)
+\setbeamertemplate{section in toc}{\inserttocsectionnumber.~\inserttocsection}
+\setbeamertemplate{subsection in toc}{\hspace{1.2em}\inserttocsectionnumber.\inserttocsubsectionnumber~\inserttocsubsection}
+
+% Customize Footline
+% Macro to display the current frame number minus 1 (so the title slide is
+% excluded from the visible count). Wrapped in a command to avoid \relax
+% running into following tokens inside the beamer template.
+\newcommand{\frameprintnumber}{\the\numexpr\insertframenumber-1\relax}
+\newcommand{\frameprinttotal}{\the\numexpr\inserttotalframenumber-1\relax}
+\setbeamertemplate{footline}{
+  \leavevmode%
+  \hbox{%
+    \begin{beamercolorbox}[wd=.22\paperwidth,ht=2.25ex,dp=1ex,left]{palette primary}%
+      \hspace*{0.5em}\usebeamerfont{author in head/foot}\insertshortauthor%
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.53\paperwidth,ht=2.25ex,dp=1ex,center]{palette tertiary}%
+      \usebeamerfont{author in head/foot}\inserttitle%
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.25\paperwidth,ht=2.25ex,dp=1ex,right]{palette primary}%
+      \usebeamerfont{date in head/foot}\insertdate \hspace*{1em}
+      \frameprintnumber{} / \frameprinttotal\hspace*{2ex}%
+    \end{beamercolorbox}}%
+  \vskip0pt%
+}
+
+% Hide Navigation Symbols
+\beamertemplatenavigationsymbolsempty
+
+% Add Logo to Background (behind all content)
+\setbeamertemplate{background}{
+  \begin{tikzpicture}[overlay, remember picture]
+    \node[anchor=south east, inner sep=0.1cm] at ([yshift=-0.5cm]current page.south east) {%
+      \includegraphics[width=2.5cm]{RWTH_Logo.png}
+    };
+  \end{tikzpicture}
+}
+
+% ============================================================================
+% Title Page Information
+\title[Short Title]{Presentation Title}
+\subtitle{Presentation Subtitle}
+\author{Your Name}
+\institute{RWTH Aachen University \\
+           Your Program}
+\date{\today}
+
+% ============================================================================
+% Begin Document
+% ============================================================================
+
+\begin{document}
+
+% Custom Title Slide with Logo Bottom Right
+{
+\setbeamertemplate{footline}{
+  \leavevmode%
+  \hbox{%
+    \begin{beamercolorbox}[wd=.22\paperwidth,ht=2.25ex,dp=1ex,left]{palette primary}%
+      \hspace*{0.5em}\usebeamerfont{author in head/foot}\insertshortauthor%
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.53\paperwidth,ht=2.25ex,dp=1ex,center]{palette tertiary}%
+      \usebeamerfont{author in head/foot}\inserttitle%
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.25\paperwidth,ht=2.25ex,dp=1ex,right]{palette primary}%
+      \usebeamerfont{date in head/foot}\insertdate \hspace*{2ex}%
+    \end{beamercolorbox}}%
+  \vskip0pt%
+}
+\begin{frame}
+  \centering
+  \vspace{0.5cm}
+  
+  \textcolor{RWTHblue}{\fontsize{20}{24}\selectfont\bfseries\inserttitle}
+  
+  \vspace{0.4cm}
+  {\small\textcolor{RWTHgrey}{\insertsubtitle}}
+  
+  \vspace{0.9cm}
+  {\normalsize\insertauthor}
+  
+  \vspace{0.15cm}
+  {\small\insertinstitute}
+  
+  \vspace{0.5cm}
+  {\small\insertdate}
+  
+  \vspace{0.3cm}
+  \phantom{placeholder}
+  
+  \vfill
+\end{frame}
+}
+
+% Table of Contents
+\begin{frame}
+  \frametitle{Overview}
+  \begin{columns}[T,onlytextwidth]
+
+    \column{0.4\textwidth}
+    \vspace{1.4cm}
+    \tableofcontents
+
+    \column{0.6\textwidth}
+    Image Placeholder %\includegraphics[width=\textwidth]{overview_image.jpg}%
+  \end{columns}
+\end{frame}
+
+% ============================================================================
+% Section 1: Introduction
+% ============================================================================
+
+\section{Introduction}
+
+\begin{frame}
+  \frametitle{Introduction}
+  \begin{itemize}
+    \item \textbf{Key term:} Brief description of the key term
+    \item \textbf{Key term:} Brief description of the key term
+    \item \textbf{Typical Markers:} 
+    \begin{itemize}
+      \item Sub-point with detail
+      \item Sub-point with detail
+      \item \textcolor{RWTHblue}{\textbf{Highlighted sub-point}}
+    \end{itemize}
+  \end{itemize}  
+\end{frame}
+
+% ============================================================================
+% Section 2: Research Question
+% ============================================================================
+
+\section{Research Question}
+
+\begin{frame}
+  \frametitle{Research Question}
+  \begin{itemize}
+    \item[\checkmark] \textbf{Observed gap:} Description of the gap
+    \item[\checkmark] \textbf{Central question:} The research question
+  \end{itemize}
+
+  \vspace{0.8cm}
+  \begin{center}
+    \textcolor{RWTHblue}{\Large \textbf{Central highlighted question or takeaway}}
+  \end{center}
+\end{frame}
+
+% ============================================================================
+% Section 3: Results
+% ============================================================================
+
+\section{Results}
+
+\begin{frame}
+  \frametitle{Results: Title with Image and Bullet Points}
+  \begin{columns}[T,onlytextwidth]
+    \column{0.35\textwidth}
+    \hspace{0.3cm}IMAGE PLACEHOLDER %\includegraphics[width=\textwidth, height=0.85\textheight, keepaspectratio]{image1.jpg}%
+
+    \column{0.63\textwidth}
+    \fontsize{10}{14}\selectfont
+    \begin{minipage}[t]{\linewidth}
+      \textbf{\textcolor{RWTHblue}{Section heading:}}
+      \begin{itemize}\setlength{\itemsep}{0.12em}
+        \item Bullet point describing a finding
+      \end{itemize}
+      \textbf{\textcolor{RWTHblue}{Section heading:}}
+      \begin{itemize}\setlength{\itemsep}{0.1em}
+        \item Bullet point describing a finding
+        \item Bullet point with nested sub-points:
+        \begin{itemize}
+          \item Sub-point with statistic
+          \item Sub-point with statistic
+        \end{itemize}
+        \item Bullet point describing a finding
+      \end{itemize}
+    \end{minipage}
+  \end{columns}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Results: Two-Column Comparison}
+  \begin{columns}[T,onlytextwidth]
+    \column{0.25\textwidth}
+    \vspace{-0.35cm}\hspace{0.1cm}IMAGE PLACEHOLDER %\includegraphics[width=\textwidth, height=0.97\textheight, keepaspectratio]{image2.jpg}%
+
+    \column{0.73\textwidth}
+    \fontsize{10}{14}\selectfont
+    \begin{minipage}[t]{\linewidth}
+      \textit{{\tiny{\textbf{Sample Size:} N patients}}}
+
+      \vspace{0.8cm}
+      {\large\textbf{\textcolor{RWTHblue}{Comparison heading}}}
+      \vspace{0.2cm}
+      \begin{columns}[T,onlytextwidth]
+        \column{0.48\linewidth}
+        \textbf{Group A:}
+        \begin{itemize}\setlength{\itemsep}{0.1em}
+         \item observation one
+         \item observation two
+         \item observation three
+        \end{itemize}
+        Summary sentence for group A\cite{example_reference}
+
+        \column{0.48\linewidth}
+        \textbf{Group B:}
+        \begin{itemize}\setlength{\itemsep}{0.1em}
+         \item observation one
+         \item observation two
+        \end{itemize}
+        Summary sentence for group B
+      \end{columns}
+
+    \end{minipage}
+  \end{columns}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Results: Findings and Limitations}
+  \begin{block}{Neutral block title}
+    Description of the finding
+  \end{block}
+  
+  \begin{exampleblock}{Example block title}
+    Description of the example
+  \end{exampleblock}
+  
+  \begin{alertblock}{Alert block title}
+    Description of the important or negative finding
+  \end{alertblock}
+\end{frame}
+
+% ============================================================================
+% Section 4: Conclusion
+% ============================================================================
+
+\section{Conclusion}
+
+\begin{frame}
+  \frametitle{Summary and Conclusion}
+  \begin{itemize}
+    \item[\checkmark] \textbf{Point one:} Summary of the first key takeaway
+    \item[\checkmark] \textbf{Point two:} Summary of the second key takeaway
+    \item[\checkmark] \textbf{Point three:} Summary of the third key takeaway
+  \end{itemize}
+  
+  \vspace{1.5cm}
+  
+  \begin{center}
+    \textcolor{RWTHblue}{\Large \textbf{Thank you for your Attention!}}
+  \end{center}
+\end{frame}
+
+% ============================================================================
+% References
+% ============================================================================
+
+\begin{frame}[allowframebreaks]
+  \frametitle{References}
+  \nocite{*}
+  \printbibliography[heading=none]
+\end{frame}
+
+
+\end{document}
